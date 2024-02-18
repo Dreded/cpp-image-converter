@@ -20,6 +20,13 @@ struct MyArgs : public argparse::Args {
       arg("img", "Path to the source image to convert");
   bool &delete_file =
       flag("delete", "Delete the original image after conversion?");
+
+  // TODO: Sanity check the input, OpenCV already does this.. but it throws an
+  // ugly error.
+  std::string &extension =
+      kwarg("e,extension",
+            "Specify output file ext(saves as that type) defaults to '.jpg'")
+          .set_default(".jpg");
 };
 
 void quit(std::string message, int exit_status = 0) {
@@ -61,7 +68,7 @@ int main(int argc, char *argv[]) {
   std::filesystem::path parent = args.fullpath.parent_path();
 
   std::filesystem::path output_file =
-      parent / filename.replace_extension(".jpg");
+      parent / filename.replace_extension(args.extension);
 
   Mat img = imread(args.fullpath, IMREAD_COLOR);
 
