@@ -17,8 +17,6 @@ Written in C++ uses opencv2
 * * for now just use find exec `find *.webp -exec image_convert {} \;`
 * allow file with list as input
 * allow to specify output name, if list append ### to end of name
-* allow specify output extension currently outputs only JPG
-* allow to specify output resolution(resize)
 
 ## Build
 
